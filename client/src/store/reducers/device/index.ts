@@ -8,6 +8,8 @@ const initialState: DeviceState = {
   brands: [
     { id: 1, name: 'Samsung' },
     { id: 2, name: 'Apple' },
+    { id: 3, name: 'Huawei' },
+    { id: 4, name: 'Xiaomi' },
   ],
   devices: [
     {
@@ -39,6 +41,8 @@ const initialState: DeviceState = {
       img: 'https://avatars.mds.yandex.net/get-mpic/5376959/img_id2357359423241897064.jpeg/orig',
     },
   ],
+  selectedType: {},
+  selectedBrand: {},
 };
 
 export default function deviceReducer(state = initialState, action: DeviceAction): DeviceState {
@@ -49,6 +53,10 @@ export default function deviceReducer(state = initialState, action: DeviceAction
       return { ...state, brands: action.payload };
     case DeviceActionEnum.SET_DEVICES:
       return { ...state, devices: action.payload };
+
+    case DeviceActionEnum.SET_SELECTED_BRAND:
+      return { ...state, selectedType: action.payload };
+
     default:
       return state;
   }

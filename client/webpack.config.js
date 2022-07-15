@@ -16,10 +16,12 @@ const config = {
   devtool: 'source-map',
   output: {
     path: path.resolve(__dirname, "dist"),
+    publicPath: '/',
   },
   devServer: {
     open: true,
     host: "localhost",
+    historyApiFallback: true,
   },
   plugins: [
     new CleanWebpackPlugin(),

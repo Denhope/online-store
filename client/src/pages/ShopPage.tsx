@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import DeviceTypeBar from '../components/products/DeviceTypeBar';
 import DeviceBrandBar from '../components/products/DeviceBrandBar';
 import { Col, Container, Row } from 'react-bootstrap';
+import DeviceList from '../components/products/DeviceList';
 const ShopPage: FC = () => {
   return (
     <Container>
@@ -11,7 +12,9 @@ const ShopPage: FC = () => {
           <DeviceBrandBar />
         </Col>
 
-        <Col md={9}>LISTITEMS</Col>
+        <Col md={9}>
+          <DeviceList />
+        </Col>
       </Row>
     </Container>
   );

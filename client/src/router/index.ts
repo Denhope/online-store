@@ -4,6 +4,8 @@ import AuthPage from '../pages/AuthPage';
 import DevicePage from '../pages/DevicePage';
 import BasketPage from '../pages/BasketPage';
 import ShopPage from '../pages/ShopPage';
+import HomePage from '../pages/HomePage';
+import AboutPage from '../pages/AboutPage';
 
 export interface IRoute {
   path: string;
@@ -13,11 +15,13 @@ export interface IRoute {
 
 export enum RouteNames {
   LOGIN_ROUTE = '/login',
-  SHOP_ROUTE = '/',
+  SHOP_ROUTE = '/products',
   REGISTRATION_ROUTE = '/registration',
   BASKET_ROUTE = '/basket',
   DEVICE_ROUTE = '/device',
   ADMIN_ROUTE = '/admin',
+  HOME_ROUTE = '/',
+  ABOUT_ROUTE = '/about',
 }
 
 export const publicRoutes = [
@@ -41,6 +45,16 @@ export const publicRoutes = [
     exact: true,
     component: ShopPage,
   },
+  {
+    path: RouteNames.ABOUT_ROUTE,
+    exact: true,
+    component: AboutPage,
+  },
+  {
+    path: RouteNames.HOME_ROUTE,
+    exact: true,
+    component: HomePage,
+  },
 ];
 
 export const privateRoutes = [
@@ -58,5 +72,15 @@ export const privateRoutes = [
     path: RouteNames.SHOP_ROUTE,
     exact: true,
     component: ShopPage,
+  },
+  {
+    path: RouteNames.ABOUT_ROUTE,
+    exact: true,
+    component: AboutPage,
+  },
+  {
+    path: RouteNames.HOME_ROUTE,
+    exact: true,
+    component: HomePage,
   },
 ];

@@ -6,9 +6,6 @@ const User = sequelize.define('user', {
     email: { type: DataTypes.STRING, unique: true, },
     password: { type: DataTypes.STRING },
     role: { type: DataTypes.STRING, defaultValue: "USER" },
-    isActivated: { type: DataTypes.BOOLEAN, default: false },
-    activationLink: { type: DataTypes.STRING },
-
 })
 
 const Basket = sequelize.define('basket', {
@@ -53,9 +50,6 @@ const TypeBrand = sequelize.define('type_brand', {
 })
 
 
-
-
-
 User.hasOne(Basket)
 Basket.belongsTo(User)
 
@@ -92,6 +86,5 @@ module.exports = {
     Brand,
     Rating,
     TypeBrand,
-    DeviceInfo,
-
+    DeviceInfo
 }

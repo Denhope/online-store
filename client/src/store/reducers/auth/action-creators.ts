@@ -6,10 +6,10 @@ import {
   SetUserAction,
 } from './types';
 import { IUser } from '../../../models/IUser';
+import AuthService from '../../../services/AuthSerrvices';
 
-import axios from 'axios';
 import { AppDispatch } from '../..';
-
+import jwt_decode from 'jwt-decode';
 export const AuthActionCreators = {
   setUser: (user: IUser): SetUserAction => ({ type: AuthActionEnum.SET_USER, payload: user }),
   setIsAuth: (auth: boolean): SetAuthAction => ({ type: AuthActionEnum.SET_AUTH, payload: auth }),
@@ -19,35 +19,56 @@ export const AuthActionCreators = {
   }),
   setError: (payload: string): SetErrorAction => ({ type: AuthActionEnum.SET_ERROR, payload }),
 
-  login: (username: string, password: string) => async (dispatch: AppDispatch) => {
+  login: (email: string, password: string) => async (dispatch: AppDispatch) => {
     try {
       dispatch(AuthActionCreators.setIsLoading(true));
-      const response = await axios.get<IUser[]>('dataUsers');
-      const user = response.data.find(
-        (user) => user.username === username && user.password === password,
+      const response = await AuthService.login(email, password);
+      dispatch(AuthActionCreators.setIsAuth(true));
+      const userData: IUser = jwt_decode(response.data.token);
+      dispatch(
+        AuthActionCreators.setUser({
+          id: userData.id,
+          email: userData.email,
+          password: '',
+          role: userData.role,
+        } as IUser),
       );
-      const userLogin = response.data.find((user) => user.username !== username);
-      const userPass = response.data.find(
-        (user) => user.username === username && user.password !== password,
-      );
-
-      if (user) {
-        localStorage.setItem('auth', 'true');
-        localStorage.setItem('username', user.username);
-        dispatch(AuthActionCreators.setUser(user));
-        dispatch(AuthActionCreators.setIsAuth(true));
-      } else if (userPass) {
-      } else if (userLogin) {
-        dispatch(AuthActionCreators.setIsLoading(false));
-      }
+      console.log(userData);
     } catch (err) {
       dispatch(AuthActionCreators.setError(err));
+      alert(err.response?.data?.message);
+    }
+  },
+  registration: (email: string, password: string) => async (dispatch: AppDispatch) => {
+    try {
+      dispatch(AuthActionCreators.setIsLoading(true));
+      const response = await AuthService.registration(email, password);
+      const userData: IUser = jwt_decode(response.data.token);
+      dispatch(AuthActionCreators.setIsAuth(true));
+      dispatch(
+        AuthActionCreators.setUser({
+          id: userData.id,
+          email: userData.email,
+          password: '',
+          role: userData.role,
+        } as IUser),
+      );
+      alert('Вы Зарегистрированы');
+      console.log(response);
+    } catch (err) {
+      dispatch(AuthActionCreators.setError(err));
+      alert(err.response?.data?.message);
     }
   },
   logout: () => async (dispatch: AppDispatch) => {
-    localStorage.removeItem('auth');
-    localStorage.removeItem('username');
-    dispatch(AuthActionCreators.setUser({} as IUser));
-    dispatch(AuthActionCreators.setIsAuth(false));
+    try {
+      const response = await AuthService.logout();
+      localStorage.removeItem('token');
+      dispatch(AuthActionCreators.setUser({} as IUser));
+      dispatch(AuthActionCreators.setIsAuth(false));
+    } catch (err) {
+      dispatch(AuthActionCreators.setError(err));
+      console.log(err.response?.data?.message);
+    }
   },
 };

@@ -1,13 +1,32 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { Button, Card, Container, Form, Row } from 'react-bootstrap';
 import { useHistory, useLocation, NavLink } from 'react-router-dom';
 import { RouteNames } from '../router';
 import './Auth.scss';
+import { useTypedSelector } from '../hooks/useTypedSelector';
+import { useActions } from '../hooks/useActions';
+// import { login, registration } from '../http/UserApi';
 
 const AuthPage: FC = () => {
   const location = useLocation();
   const isLogin = location.pathname === RouteNames.LOGIN_ROUTE;
   const history = useHistory();
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const { user } = useTypedSelector((state) => state.auth);
+  const { login, registration, logout } = useActions();
+  const handleClick = async () => {
+    try {
+      if (isLogin) {
+        login(email, password);
+      } else {
+        registration(email, password);
+      }
+    } catch (e) {
+      alert(e.response.data.message);
+      history.push(RouteNames.LOGIN_ROUTE);
+    }
+  };
   return (
     <Container
       className="d-flex justify-content-center align-items-center"
@@ -19,14 +38,14 @@ const AuthPage: FC = () => {
           <Form.Control
             className="mt-3"
             placeholder="Введите ваш email..."
-            // value={email}
-            onChange={(e) => null}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <Form.Control
             className="mt-3"
             placeholder="Введите ваш пароль..."
-            // value={password}
-            onChange={(e) => null}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             type="password"
           />
           <div className="form__control">
@@ -41,7 +60,7 @@ const AuthPage: FC = () => {
               </div>
             )}
 
-            <Button onClick={() => null}>{isLogin ? 'Войти' : 'Регистрация'}</Button>
+            <Button onClick={handleClick}>{isLogin ? 'Войти' : 'Регистрация'}</Button>
           </div>
         </Form>
       </Card>

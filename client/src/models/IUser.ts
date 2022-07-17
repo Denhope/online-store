@@ -1,11 +1,17 @@
+import { IDeviceType } from './IDevice';
+
 export interface IUser {
-  username: string;
+  id: number;
+  email: string;
   password: string;
-  firstname?: string;
-  midlename?: string;
-  lastname?: string;
-  country?: string;
-  city?: string;
-  telephone?: string;
-  photoUrl?: string;
+  role: string;
+  basket: IDeviceType[];
+}
+
+interface IUserDto {
+  email: string;
+  exp: number;
+  iat: number;
+  id: number;
+  role: string;
 }

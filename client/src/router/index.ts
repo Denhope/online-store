@@ -64,6 +64,11 @@ export const privateRoutes = [
     component: AdminPage,
   },
   {
+    path: RouteNames.DEVICE_ROUTE + '/:id',
+    exact: true,
+    component: DevicePage,
+  },
+  {
     path: RouteNames.BASKET_ROUTE,
     exact: true,
     component: BasketPage,

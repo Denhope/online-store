@@ -5,7 +5,6 @@ import { RouteNames } from '../router';
 import './Auth.scss';
 import { useTypedSelector } from '../hooks/useTypedSelector';
 import { useActions } from '../hooks/useActions';
-// import { login, registration } from '../http/UserApi';
 
 const AuthPage: FC = () => {
   const location = useLocation();
@@ -14,7 +13,7 @@ const AuthPage: FC = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const { isLoading } = useTypedSelector((state) => state.auth);
-  const { login, registration, logout } = useActions();
+  const { login, registration } = useActions();
 
   if (isLoading) {
     return <Spinner animation={'border'}></Spinner>;

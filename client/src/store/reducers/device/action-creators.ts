@@ -1,6 +1,12 @@
 import { AppDispatch } from '../..';
 import { IType, IBrandType } from '../../../models/IDevice';
-import { DeviceActionEnum, RecieveDevicesErrorAction, SetIsLoadingAction } from './types';
+import {
+  DeviceActionEnum,
+  RecieveDevicesErrorAction,
+  SetIsLoadingAction,
+  SetLimitAction,
+  SetPageAction,
+} from './types';
 import DeviceService from '../../../services/DeviceServices';
 
 export const DeviceActionCreators = {
@@ -13,21 +19,34 @@ export const DeviceActionCreators = {
     payload,
   }),
 
-  featchDevices: () => async (dispatch: AppDispatch) => {
-    try {
-      dispatch({ type: DeviceActionEnum.REQUEST_DEVICES });
-      const response = await DeviceService.fetchDevices();
-      dispatch({ type: DeviceActionEnum.RECEIVE_DEVICES_SUCCESS, payload: response.data.rows });
-    } catch (err) {
-      dispatch({ type: DeviceActionEnum.RECEIVE_DEVICES_ERROR, payload: err });
-    }
-  },
+  featchDevices:
+    (typeId: any, brandId: any, limit: number, page: number) => async (dispatch: AppDispatch) => {
+      try {
+        dispatch({ type: DeviceActionEnum.REQUEST_DEVICES });
+        const response = await DeviceService.fetchDevices(typeId, brandId, limit, page);
+        dispatch({ type: DeviceActionEnum.RECEIVE_DEVICES_SUCCESS, payload: response.data.rows });
+        dispatch({ type: DeviceActionEnum.SET_TOTAL_COUNT, payload: response.data.count });
+        dispatch({ type: DeviceActionEnum.SET_LIMIT, payload: limit });
+        dispatch({ type: DeviceActionEnum.SET_PAGE, payload: page });
+      } catch (err) {
+        dispatch({ type: DeviceActionEnum.RECEIVE_DEVICES_ERROR, payload: err });
+      }
+    },
+  setPageNumber: (payload: number): SetPageAction => ({
+    type: DeviceActionEnum.SET_PAGE,
+    payload,
+  }),
+  setLimit: (payload: number): SetLimitAction => ({
+    type: DeviceActionEnum.SET_LIMIT,
+    payload,
+  }),
+
   fethOneDevice: (id: string) => async (dispatch: AppDispatch) => {
     try {
       dispatch({ type: DeviceActionEnum.REQUEST_ONE_DEVICE });
       const response = await DeviceService.fetchOneDevice(id);
       dispatch({ type: DeviceActionEnum.RECEIVE_ONE_DEVICE_SUCCESS, payload: response.data });
-      // console.log(response);
+
       // dispatch({
       //   type: DeviceActionEnum.SET_SELECTED_DEVICE,
       //   payload: response.data,
@@ -40,6 +59,15 @@ export const DeviceActionCreators = {
       // return response.data[Number(id) - 1];
     } catch (err) {
       dispatch({ type: DeviceActionEnum.RECEIVE_ONE_DEVICE_ERROR, payload: err });
+    }
+  },
+
+  fetchBrands: () => async (dispatch: AppDispatch) => {
+    try {
+      const response = await DeviceService.fetchBrands();
+      dispatch({ type: DeviceActionEnum.SET_BRANDS, payload: response.data });
+    } catch (err) {
+      dispatch({ type: DeviceActionEnum.RECEIVE_DEVICES_ERROR, payload: err });
     }
   },
 

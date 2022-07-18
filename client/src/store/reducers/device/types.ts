@@ -9,6 +9,9 @@ export interface DeviceState {
   selectedDevice: IDeviceType;
   isLoading: boolean;
   error: null | string;
+  page: number;
+  totalCount: number;
+  limit: number;
 }
 
 export enum DeviceActionEnum {
@@ -18,6 +21,9 @@ export enum DeviceActionEnum {
   SET_SELECTED_TYPE = 'SET_SELECTED_TYPE',
   SET_SELECTED_BRAND = 'SET_SELECTED_BRAND',
   SET_SELECTED_DEVICE = 'SET_SELECTED_DEVICE',
+  SET_LIMIT = 'SET_LIMIT',
+  SET_PAGE = 'SET_PAGE',
+  SET_TOTAL_COUNT = 'SET_TOTAL_COUNT',
   REQUEST_DEVICES = 'REQUEST_DEVICES',
   RECEIVE_DEVICES_SUCCESS = 'RECEIVE_DEVICES_SUCCESS',
   RECEIVE_DEVICES_ERROR = 'RECEIVE_DEVICES_ERROR',
@@ -25,6 +31,19 @@ export enum DeviceActionEnum {
   REQUEST_ONE_DEVICE = 'REQUEST_ONE_DEVICE',
   RECEIVE_ONE_DEVICE_SUCCESS = 'RECEIVE_ONE_DEVICE_SUCCESS',
   RECEIVE_ONE_DEVICE_ERROR = 'RECEIVE_ONE_DEVICE_ERROR',
+}
+
+export interface SetLimitAction {
+  type: DeviceActionEnum.SET_LIMIT;
+  payload: number;
+}
+export interface SetPageAction {
+  type: DeviceActionEnum.SET_PAGE;
+  payload: number;
+}
+export interface SetTotalCountAction {
+  type: DeviceActionEnum.SET_TOTAL_COUNT;
+  payload: number;
 }
 
 export interface RequestDevicesAction {
@@ -79,6 +98,9 @@ export interface SetSelectedBrandAction {
 }
 
 export type DeviceAction =
+  | SetPageAction
+  | SetTotalCountAction
+  | SetLimitAction
   | RecieveOneDeviceErrorAction
   | RequestOneDeviceAction
   | RecieveOneDeviceAction

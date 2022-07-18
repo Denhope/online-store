@@ -7,9 +7,10 @@ export interface IBrandType {
   name: string;
 }
 export interface IDeviceType {
-  id: number;
+  id: string;
   name: string;
   price: number;
   rating: number;
   img: string;
+  discription: Array<{}>;
 }

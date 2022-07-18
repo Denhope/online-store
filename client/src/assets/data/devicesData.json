@@ -1,0 +1,103 @@
+[
+  {
+    "id": 1,
+    "name": "p40",
+    "price": 123,
+    "rating": 5,
+    "img": "https://avatars.mds.yandex.net/get-mpic/5376959/img_id2357359423241897064.jpeg/orig",
+    "description": [
+      { "id": 1, "title": "Оперативная память", "discription": "5гб" },
+      { "id": 2, "title": "Камера", "discription": "12МП" },
+      { "id": 3, "title": "Процессор", "discription": "MTK" },
+      { "id": 4, "title": "NFC:", "discription": "Есть" },
+      { "id": 5, "title": "Частота обновления экрана", "discription": "3G (WCDMA)" },
+      { "id": 6, "title": "Стандарты сотовой связи", "discription": "5гб" },
+      { "id": 7, "title": "Операционная система", "discription": "Android" }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "p40",
+    "price": 123,
+    "rating": 5,
+    "img": "https://avatars.mds.yandex.net/get-mpic/5376959/img_id2357359423241897064.jpeg/orig",
+
+    "description": [
+      { "id": 1, "title": "Оперативная память", "discription": "5гб" },
+      { "id": 2, "title": "Камера", "discription": "12МП" },
+      { "id": 3, "title": "Процессор", "discription": "MTK" },
+      { "id": 4, "title": "NFC:", "discription": "Есть" },
+      { "id": 5, "title": "Частота обновления экрана", "discription": "3G (WCDMA)" },
+      { "id": 6, "title": "Стандарты сотовой связи", "discription": "5гб" },
+      { "id": 7, "title": "Операционная система", "discription": "Android" }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "p40",
+    "price": 123,
+    "rating": 5,
+    "img": "https://avatars.mds.yandex.net/get-mpic/5376959/img_id2357359423241897064.jpeg/orig",
+
+    "description": [
+      { "id": 1, "title": "Оперативная память", "discription": "5гб" },
+      { "id": 2, "title": "Камера", "discription": "12МП" },
+      { "id": 3, "title": "Процессор", "discription": "MTK" },
+      { "id": 4, "title": "NFC:", "discription": "Есть" },
+      { "id": 5, "title": "Частота обновления экрана", "discription": "3G (WCDMA)" },
+      { "id": 6, "title": "Стандарты сотовой связи", "discription": "5гб" },
+      { "id": 7, "title": "Операционная система", "discription": "Android" }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "p40",
+    "price": 123,
+    "rating": 5,
+    "img": "https://avatars.mds.yandex.net/get-mpic/5376959/img_id2357359423241897064.jpeg/orig",
+
+    "description": [
+      { "id": 1, "title": "Оперативная память", "discription": "5гб" },
+      { "id": 2, "title": "Камера", "discription": "12МП" },
+      { "id": 3, "title": "Процессор", "discription": "MTK" },
+      { "id": 4, "title": "NFC:", "discription": "Есть" },
+      { "id": 5, "title": "Частота обновления экрана", "discription": "3G (WCDMA)" },
+      { "id": 6, "title": "Стандарты сотовой связи", "discription": "5гб" },
+      { "id": 7, "title": "Операционная система", "discription": "Android" }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "p40",
+    "price": 123,
+    "rating": 5,
+    "img": "https://avatars.mds.yandex.net/get-mpic/5376959/img_id2357359423241897064.jpeg/orig",
+
+    "description": [
+      { "id": 1, "title": "Оперативная память", "discription": "5гб" },
+      { "id": 2, "title": "Камера", "discription": "12МП" },
+      { "id": 3, "title": "Процессор", "discription": "MTK" },
+      { "id": 4, "title": "NFC:", "discription": "Есть" },
+      { "id": 5, "title": "Частота обновления экрана", "discription": "3G (WCDMA)" },
+      { "id": 6, "title": "Стандарты сотовой связи", "discription": "5гб" },
+      { "id": 7, "title": "Операционная система", "discription": "Android" }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "p40",
+    "price": 123,
+    "rating": 5,
+    "img": "https://avatars.mds.yandex.net/get-mpic/5376959/img_id2357359423241897064.jpeg/orig",
+
+    "description": [
+      { "id": 1, "title": "Оперативная память", "discription": "5гб" },
+      { "id": 2, "title": "Камера", "discription": "12МП" },
+      { "id": 3, "title": "Процессор", "discription": "MTK" },
+      { "id": 4, "title": "NFC:", "discription": "Есть" },
+      { "id": 5, "title": "Частота обновления экрана", "discription": "3G (WCDMA)" },
+      { "id": 6, "title": "Стандарты сотовой связи", "discription": "5гб" },
+      { "id": 7, "title": "Операционная система", "discription": "Android" }
+    ]
+  }
+]

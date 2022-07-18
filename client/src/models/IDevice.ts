@@ -1,9 +1,9 @@
 export interface IType {
-  id: number;
+  id: any;
   name: string;
 }
 export interface IBrandType {
-  id: number;
+  id: any;
   name: string;
 }
 export interface IDeviceType {

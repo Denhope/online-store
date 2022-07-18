@@ -8,12 +8,14 @@ import { useTypedSelector } from '../hooks/useTypedSelector';
 import { useActions } from '../hooks/useActions';
 
 const ShopPage: FC = () => {
-  const { page } = useTypedSelector((state) => state.device);
-  const { featchDevices } = useActions();
+  const { page, selectedBrand, selectedType } = useTypedSelector((state) => state.device);
+  const { featchDevices, fetchTypes, fetchBrands } = useActions();
 
   useEffect(() => {
-    featchDevices(null, null, 2, page);
-  }, [page]);
+    fetchTypes();
+    fetchBrands();
+    featchDevices(selectedType, selectedBrand, 2, page);
+  }, [page, selectedBrand, selectedType]);
 
   return (
     <Container>

@@ -6,6 +6,7 @@ import {
   SetIsLoadingAction,
   SetLimitAction,
   SetPageAction,
+  SetSelectedTypeAction,
 } from './types';
 import DeviceService from '../../../services/DeviceServices';
 
@@ -61,19 +62,32 @@ export const DeviceActionCreators = {
       dispatch({ type: DeviceActionEnum.RECEIVE_ONE_DEVICE_ERROR, payload: err });
     }
   },
-
-  fetchBrands: () => async (dispatch: AppDispatch) => {
+  fetchTypes: () => async (dispatch: AppDispatch) => {
     try {
-      const response = await DeviceService.fetchBrands();
-      dispatch({ type: DeviceActionEnum.SET_BRANDS, payload: response.data });
+      dispatch({ type: DeviceActionEnum.REQUEST_TYPES });
+      const response = await DeviceService.fetchTypes();
+      dispatch({ type: DeviceActionEnum.RECEIVE_TYPES_SUCCESS, payload: response.data });
     } catch (err) {
-      dispatch({ type: DeviceActionEnum.RECEIVE_DEVICES_ERROR, payload: err });
+      dispatch({ type: DeviceActionEnum.RECEIVE_TYPES_ERROR, payload: err });
     }
   },
 
-  setSelectedType: (type: IType) => ({ type: DeviceActionEnum.SET_SELECTED_TYPE, payload: type }),
+  fetchBrands: () => async (dispatch: AppDispatch) => {
+    try {
+      dispatch({ type: DeviceActionEnum.REQUEST_BRANDS });
+      const response = await DeviceService.fetchBrands();
+      dispatch({ type: DeviceActionEnum.RECEIVE_BRANDS_SUCCESS, payload: response.data });
+    } catch (err) {
+      dispatch({ type: DeviceActionEnum.RECEIVE_BRANDS_ERROR, payload: err });
+    }
+  },
+
+  setSelectedType: (type: IType) => ({
+    type: DeviceActionEnum.SET_SELECTED_TYPE,
+    payload: type.id,
+  }),
   setSelectedBrand: (type: IBrandType) => ({
     type: DeviceActionEnum.SET_SELECTED_BRAND,
-    payload: type,
+    payload: type.id,
   }),
 };

@@ -1,28 +1,28 @@
 import React, { FC } from 'react';
-import { NavDropdown } from 'react-bootstrap';
+import { ListGroup, NavDropdown } from 'react-bootstrap';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 
 import { useActions } from '../../hooks/useActions';
 
 const DeviceBrandBar: FC = () => {
   const { setSelectedBrand } = useActions();
-  const { brands } = useTypedSelector((state) => state.device);
+  const { brands, selectedBrand } = useTypedSelector((state) => state.device);
   return (
-    <NavDropdown title="Брэнды">
+    <ListGroup title="Брэнды">
+      <h3 className="mr-auto ">Брэнды</h3>
       {brands.map((brand) => (
-        <NavDropdown.Item
+        <ListGroup.Item
           onClick={() => {
             setSelectedBrand(brand);
-            console.log('Selected type: ' + brand.name);
           }}
           action
           variant="secondary"
           key={brand.id}
         >
           {brand.name}
-        </NavDropdown.Item>
+        </ListGroup.Item>
       ))}
-    </NavDropdown>
+    </ListGroup>
   );
 };
 

@@ -21,7 +21,6 @@ export const AuthActionCreators = {
 
   login: (email: string, password: string) => async (dispatch: AppDispatch) => {
     try {
-      dispatch(AuthActionCreators.setIsLoading(true));
       const response = await AuthService.login(email, password);
       dispatch(AuthActionCreators.setIsAuth(true));
       const userData: IUser = jwt_decode(response.data.token);
@@ -33,7 +32,6 @@ export const AuthActionCreators = {
           role: userData.role,
         } as IUser),
       );
-      console.log(userData);
     } catch (err) {
       dispatch(AuthActionCreators.setError(err));
       alert(err.response?.data?.message);
@@ -54,10 +52,11 @@ export const AuthActionCreators = {
         } as IUser),
       );
       alert('Вы Зарегистрированы');
-      console.log(response);
+      dispatch(AuthActionCreators.setIsLoading(false));
     } catch (err) {
       dispatch(AuthActionCreators.setError(err));
       alert(err.response?.data?.message);
+      dispatch(AuthActionCreators.setIsLoading(false));
     }
   },
   logout: () => async (dispatch: AppDispatch) => {
@@ -65,10 +64,10 @@ export const AuthActionCreators = {
       const response = await AuthService.logout();
       localStorage.removeItem('token');
       dispatch(AuthActionCreators.setUser({} as IUser));
-      dispatch(AuthActionCreators.setIsAuth(false));
     } catch (err) {
       dispatch(AuthActionCreators.setError(err));
       console.log(err.response?.data?.message);
+      dispatch(AuthActionCreators.setIsLoading(false));
     }
   },
 };

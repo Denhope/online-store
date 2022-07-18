@@ -13,7 +13,6 @@ const DeviceTypeBar: FC = () => {
         <ListGroup.Item
           onClick={() => {
             setSelectedType(type);
-            console.log('Selected type: ' + type.name);
           }}
           action
           variant="secondary"

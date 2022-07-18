@@ -1,8 +1,10 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import DeviceTypeBar from '../components/products/DeviceTypeBar';
 import DeviceBrandBar from '../components/products/DeviceBrandBar';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Col, Container, Row, Spinner } from 'react-bootstrap';
 import DeviceList from '../components/products/DeviceList';
+import { useTypedSelector } from '../hooks/useTypedSelector';
+
 const ShopPage: FC = () => {
   return (
     <Container>

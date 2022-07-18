@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { Button, Card, Container, Form, Row } from 'react-bootstrap';
+import { Button, Card, Container, Form, Row, Spinner } from 'react-bootstrap';
 import { useHistory, useLocation, NavLink } from 'react-router-dom';
 import { RouteNames } from '../router';
 import './Auth.scss';
@@ -13,8 +13,13 @@ const AuthPage: FC = () => {
   const history = useHistory();
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const { user } = useTypedSelector((state) => state.auth);
+  const { isLoading } = useTypedSelector((state) => state.auth);
   const { login, registration, logout } = useActions();
+
+  if (isLoading) {
+    return <Spinner animation={'border'}></Spinner>;
+  }
+
   const handleClick = async () => {
     try {
       if (isLogin) {

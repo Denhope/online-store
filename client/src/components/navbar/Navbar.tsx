@@ -6,12 +6,24 @@ import { Container } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 
 import { useTypedSelector } from '../../hooks/useTypedSelector';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { RouteNames } from '../../router';
+import { useActions } from '../../hooks/useActions';
 
 const Header: FC = () => {
   const { isAuth, user } = useTypedSelector((state) => state.auth);
   const history = useHistory();
+  const { setUser, setIsAuth } = useActions();
+
+  const logOut = () => {
+    setUser({
+      id: 0,
+      email: '',
+      password: '',
+      role: '',
+      basket: [],
+    });
+    setIsAuth(false);
+  };
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
@@ -19,23 +31,23 @@ const Header: FC = () => {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <NavLink className={'nav-link'} to={RouteNames.HOME_ROUTE}>
+            <NavLink className="nav-link" to={RouteNames.HOME_ROUTE}>
               Главная
             </NavLink>
-            <NavLink className={'nav-link'} to={RouteNames.ABOUT_ROUTE}>
+            <NavLink className="nav-link" to={RouteNames.ABOUT_ROUTE}>
               Про Нас
             </NavLink>
-            <NavLink className={'nav-link'} to={RouteNames.SHOP_ROUTE}>
+            <NavLink className="nav-link" to={RouteNames.SHOP_ROUTE}>
               Продукты
             </NavLink>
           </Nav>
 
           {isAuth ? (
             <Nav className="ml-auto">
-              <NavLink className={'nav-link'} to={RouteNames.ADMIN_ROUTE}>
-                Админ Панель
+              <NavLink className="nav-link" to={RouteNames.ADMIN_ROUTE}>
+                Личный Кабинет
               </NavLink>
-              <NavLink onClick={() => logOut()} className={'nav-link'} to={RouteNames.ADMIN_ROUTE}>
+              <NavLink onClick={() => logOut()} className="nav-link" to={RouteNames.ADMIN_ROUTE}>
                 Выйти
               </NavLink>
             </Nav>
@@ -53,6 +65,3 @@ const Header: FC = () => {
 };
 
 export default Header;
-function logOut(): void {
-  throw new Error('Function not implemented.');
-}
